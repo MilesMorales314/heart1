@@ -1,4 +1,4 @@
-import os
+from os import path
 import pandas as pd
 import numpy as np
 import flask
@@ -14,7 +14,9 @@ def index():
 
 def ValuePredictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1,6)
-    loaded_model = joblib.load(r'C:\Users\Harsha Nandan\Desktop\Python DS\Untitled Folder\venv\heart.joblib')
+    joblib_path = path.join(path.dirname(r"D:\Mahesh\Coding\Projects\heart1\venv\app.py"), "heart.joblib")
+    print(joblib_path)
+    loaded_model = joblib.load(joblib_path)
     result = loaded_model.predict(to_predict)
     return 'You are safe' if int(result[0]) else 'You have a risk of heart disease'
 
